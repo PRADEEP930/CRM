@@ -117,20 +117,19 @@ CRM/
 └── docker-compose.yml       # Docker configuration
 ```
 
-## 📄
-**📡 API Documentation**
-Authentication
-POST /api/auth/login - User login
+## 📄📡 API Documentation
+**Authentication**
+- POST /api/auth/login - User login
 
-POST /api/auth/register - User registration (backend ready)
+- POST /api/auth/register - User registration (backend ready)
 
-Leads Management
-GET /api/leads - Get all leads (protected)
+**Leads Management**
+- GET /api/leads - Get all leads (protected)
 
-POST /api/leads - Create new lead (protected)
+- POST /api/leads - Create new lead (protected)
 
-Health Check
-GET /api/health - API status check
+**Health Check**
+- GET /api/health - API status check
 
 **🗃 Database Schema**
 ```bash
@@ -161,32 +160,32 @@ model Lead {
 }
 ```
 
-**🚧 Development Roadmap**
-Phase 1 - Complete ✅
-Project setup and architecture
+## 🚧 Development Roadmap**
+**Phase 1 - Complete ✅**
+- Project setup and architecture
 
-Database design and ORM setup
+- Database design and ORM setup
 
-Authentication system
+- Authentication system
 
-Basic lead management
+- Basic lead management
 
-Docker containerization
+- Docker containerization
 
 **Phase 2 - In Progress 🔄**
-User registration interface
+- User registration interface
 
-Lead update and delete operations
+- Lead update and delete operations
 
-Activity timeline for leads
+- Activity timeline for leads
 
-Real-time notifications with Socket.io
+- Real-time notifications with Socket.io
 
-Analytics dashboard with charts
+- Analytics dashboard with charts
 
-Email automation system
+- Email automation system
 
-Comprehensive testing suite
+- Comprehensive testing suite
 
 **🤝 Contributing**
 This is an active development project. Contributions are welcome! Please feel free to submit issues and enhancement requests.
@@ -198,4 +197,4 @@ This project is developed as part of a technical assessment.
 Pradeep Yadav - Initial development and architecture
 
 ---
-Note: This is a work in progress. The core authentication and lead management features are fully functional, with additional features planned for future releases.
+**Note**: This is a work in progress. The core authentication and lead management features are fully functional, with additional features planned for future releases.
