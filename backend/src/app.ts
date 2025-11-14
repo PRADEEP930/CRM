@@ -14,6 +14,19 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// CORS configuration for production
+const corsOptions = {
+  origin: [
+    'http://localhost:3000', // Development
+    'https://your-vercel-app.vercel.app', // Your Vercel domain
+    'https://*.vercel.app' // All Vercel deployments
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

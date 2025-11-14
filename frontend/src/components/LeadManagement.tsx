@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './LeadManagement.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 interface Lead {
   id: string;
   name: string;
@@ -23,6 +25,7 @@ interface LeadManagementProps {
   onLogout: () => void;
 }
 
+
 const LeadManagement: React.FC<LeadManagementProps> = ({ user, onLogout }) => {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
@@ -44,9 +47,9 @@ const LeadManagement: React.FC<LeadManagementProps> = ({ user, onLogout }) => {
   const fetchLeads = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/leads', {
+      const response = await fetch(`${API_BASE_URL}/api/leads`, {
         headers: {
-          'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`
         }
       });
       
@@ -67,7 +70,7 @@ const LeadManagement: React.FC<LeadManagementProps> = ({ user, onLogout }) => {
       const token = localStorage.getItem('token');
       console.log('Creating lead with:', newLead); // Debug log
       
-      const response = await fetch('http://localhost:5000/api/leads', {
+      const response = await fetch(`${API_BASE_URL}/api/leads`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
