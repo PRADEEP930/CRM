@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      UserRole @default(SALES_EXECUTIVE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships
+  leads      Lead[]
+  activities Activity[]
+
+  @@map("users")
+}
+
+model Lead {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  company     String?
+  status      LeadStatus @default(NEW)
+  source      String?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relationships
+  assignedToId String?
+  assignedTo   User?    @relation(fields: [assignedToId], references: [id])
+  activities   Activity[]
+
+  @@map("leads")
+}
+
+model Activity {
+  id          String      @id @default(cuid())
+  type        ActivityType
+  title       String
+  description String?
+  dueDate     DateTime?
+  completed   Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Relationships
+  leadId      String
+  lead        Lead        @relation(fields: [leadId], references: [id])
+  userId      String
+  user        User        @relation(fields: [userId], references: [id])
+
+  @@map("activities")
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  SALES_EXECUTIVE
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  PROPOSAL
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum ActivityType {
+  CALL
+  MEETING
+  EMAIL
+  NOTE
+  TASK
+}
